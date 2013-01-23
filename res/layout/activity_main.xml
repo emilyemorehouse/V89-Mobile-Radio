@@ -8,49 +8,61 @@
     android:padding="0dp"
     android:paddingLeft="0dp"
     tools:context=".MainActivity" >
-
-    <TabHost
-        android:id="@android:id/tabhost"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
+    
+        <SlidingDrawer
+            android:id="@+id/mainlayout"
+            android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:content="@+id/content"
+            android:handle="@+id/handle" >
 
-            <TabWidget
-                android:id="@android:id/tabs"
-                android:layout_width="60dp"
-                android:layout_height="match_parent" >
-            </TabWidget>
+            <ImageButton
+            android:id="@+id/handle"
+            style="@style/Tabs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/button_description"
+            android:src="@drawable/ic_tab_v89" />
 
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+            <LinearLayout
+                android:id="@+id/content"
+                android:layout_width="80dp"
+                android:layout_height="482dp"
+                android:orientation="vertical" >
 
-                <LinearLayout
-                    android:id="@+id/tab1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-                </LinearLayout>
+		        <ImageButton
+		            android:id="@+id/button_radio"
+		            style="@style/Tabs"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:contentDescription="@string/button_description"
+		            android:src="@drawable/tab_icon_radio" />
+		
+		        <ImageButton
+		            android:id="@+id/button_calendar"
+		            style="@style/Tabs"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:contentDescription="@string/button_description"
+		            android:src="@drawable/tab_icon_list" />
+		
+		        <ImageButton
+		            android:id="@+id/ImageButton02"
+		            style="@style/Tabs"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:src="@drawable/tab_icon_radio"
+		            android:contentDescription="@string/button_description" />
+		
+		        <ImageButton
+		            android:id="@+id/ImageButton01"
+		            style="@style/Tabs"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:src="@drawable/tab_icon_radio"
+		            android:contentDescription="@string/button_description" />
 
-                <LinearLayout
-                    android:id="@+id/tab2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/tab3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-                </LinearLayout>
-            </FrameLayout>
-        </LinearLayout>
-    </TabHost>
+            </LinearLayout>
+        </SlidingDrawer>
 
 </RelativeLayout>
