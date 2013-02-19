@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    			xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/tabpanel"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="vertical" >
+
+		        <ImageButton
+		            android:id="@+id/button_radio"
+		            style="@style/Tabs"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:contentDescription="@string/button_description"
+		            android:src="@drawable/tab_icon_radio" />
+		
+		        <ImageButton
+		            android:id="@+id/button_calendar"
+		            style="@style/Tabs"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:contentDescription="@string/button_description"
+		            android:src="@drawable/tab_icon_list" />
+		
+		        <ImageButton
+		            android:id="@+id/ImageButton02"
+		            style="@style/Tabs"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:src="@drawable/tab_icon_radio"
+		            android:contentDescription="@string/button_description" />
+		
+		        <ImageButton
+		            android:id="@+id/ImageButton01"
+		            style="@style/Tabs"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:src="@drawable/tab_icon_radio"
+		            android:contentDescription="@string/button_description" />
+
+            </LinearLayout>
