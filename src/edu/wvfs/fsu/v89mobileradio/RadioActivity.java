@@ -6,16 +6,11 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Bundle;
 import android.os.Handler;
-import android.app.Activity;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.MediaController;
-import android.widget.ToggleButton;
 public class RadioActivity extends FragmentActivity implements OnPreparedListener, MediaController.MediaPlayerControl {
 	
 	private MediaController mc;
@@ -29,41 +24,46 @@ public class RadioActivity extends FragmentActivity implements OnPreparedListene
 		setContentView(R.layout.activity_main);
 		FragmentManager fm = getSupportFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
-		Fragment frag = new RadioFragment();
-		ft.add(R.id.RelativeLayout1, frag);
+		ft.replace(R.id.content_fragment, new RadioFragment());
 		ft.commit();
 		
 		mp = new MediaPlayer();
 		mp.setOnPreparedListener(this);
-	    mc = new MediaController(this);
-		try {
-			mp.setDataSource("http://voice.wvfs.fsu.edu:8000/stream");
-			mp.prepare();
-
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	    mc = new MyMediaController(this);
+		new Thread(new Runnable(){
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				try {
+					mp.setDataSource("http://voice.wvfs.fsu.edu:8000/stream");
+					mp.prepare();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
+		}).start();
 	}
 	
 	public void onPrepared(MediaPlayer mediaPlayer) {
 	    mc.setMediaPlayer(this);
 	    mc.setAnchorView(findViewById(R.id.RadioLayout));
-
+        mediaPlayer.start();
 	    handler.post(new Runnable() {
 	      public void run() {
 	        mc.setEnabled(true);
-	        mc.show();
+	        mc.show(0);
 	      }
 	    });
 	  }
@@ -78,7 +78,7 @@ public class RadioActivity extends FragmentActivity implements OnPreparedListene
 	@Override
 	public boolean canPause() {
 		// TODO Auto-generated method stub
-		return false;
+		return mp.isPlaying();
 	}
 
 	@Override
@@ -113,14 +113,13 @@ public class RadioActivity extends FragmentActivity implements OnPreparedListene
 
 	@Override
 	public boolean isPlaying() {
-		// TODO Auto-generated method stub
-		return false;
+		return mp.isPlaying();
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+		mp.pause();
 	}
 
 	@Override
@@ -132,7 +131,7 @@ public class RadioActivity extends FragmentActivity implements OnPreparedListene
 	@Override
 	public void start() {
 		// TODO Auto-generated method stub
-		
+		mp.start();
 	}
 
 }

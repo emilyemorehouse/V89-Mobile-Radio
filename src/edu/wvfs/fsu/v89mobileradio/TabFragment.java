@@ -1,8 +1,8 @@
 package edu.wvfs.fsu.v89mobileradio;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +21,10 @@ public class TabFragment extends android.support.v4.app.Fragment {
 			@Override
 			public void onClick(View v) {
 				if(currentTab == 0) return;
-				Intent radio = new Intent();
-				radio.setClass(act, RadioActivity.class);
-				radio.putExtra("tab", 0);
-				startActivity(radio);
+				FragmentTransaction ft = getFragmentManager().beginTransaction();
+				ft.replace(R.id.content_fragment, new RadioFragment());
+				currentTab = 0;
+				ft.commit();
 			}
 			
 		});
@@ -35,10 +35,10 @@ public class TabFragment extends android.support.v4.app.Fragment {
 			@Override
 			public void onClick(View v) {
 				if(currentTab == 1) return;
-				Intent calendar = new Intent();
-				calendar.setClass(act, CalendarActivity.class);
-				calendar.putExtra("tab", 1);
-				startActivity(calendar);
+				FragmentTransaction ft = getFragmentManager().beginTransaction();
+				ft.replace(R.id.content_fragment, new CalendarFragment());
+				currentTab = 1;
+				ft.commit();
 			}
 			
 		});

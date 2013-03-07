@@ -13,12 +13,10 @@
         android:text="Das RADIO" >
     </TextView>
 
-    <ToggleButton
-        android:id="@+id/playpause_button"
+    <MediaController
+        android:id="@+id/radio_controller"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ToggleButton"
-        android:textOff="PLAY"
-        android:textOn="PAUSE" />
+        android:layout_height="wrap_content" >
+    </MediaController>
 
 </LinearLayout>
