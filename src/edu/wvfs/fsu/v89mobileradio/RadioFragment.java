@@ -10,7 +10,7 @@ public class RadioFragment extends android.support.v4.app.Fragment {
 	 public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	   Bundle savedInstanceState) {
 	  // TODO Auto-generated method stub
-	  View myFragmentView = inflater.inflate(R.layout.content_fragment, container, false);
+	  View myFragmentView = inflater.inflate(R.layout.radio_fragment, container, false);
 	  
 	  return myFragmentView;
 	 }
