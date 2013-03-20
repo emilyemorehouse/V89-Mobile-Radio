@@ -11,7 +11,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello Calendar"
-        android:textColor="#FFFFFF" />
+        android:text="@string/calendar_text"
+        android:textColor="#FFFFFF" >
+    </TextView>
+
 
 </LinearLayout>
