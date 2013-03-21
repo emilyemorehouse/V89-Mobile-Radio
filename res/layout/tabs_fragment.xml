@@ -23,7 +23,7 @@
 		            android:src="@drawable/tab_icon_list" />
 		
 		        <ImageButton
-		            android:id="@+id/ImageButton02"
+		            android:id="@+id/button_browse"
 		            style="@style/Tabs"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
 		            android:contentDescription="@string/button_description" />
 		
 		        <ImageButton
-		            android:id="@+id/ImageButton01"
+		            android:id="@+id/button_contact"
 		            style="@style/Tabs"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"

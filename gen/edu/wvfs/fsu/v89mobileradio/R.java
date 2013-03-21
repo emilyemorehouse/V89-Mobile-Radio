@@ -21,11 +21,11 @@ public final class R {
         public static final int tab_icon_radio=0x7f020007;
     }
     public static final class id {
-        public static final int ImageButton01=0x7f07000b;
-        public static final int ImageButton02=0x7f07000a;
         public static final int RadioLayout=0x7f070005;
         public static final int RelativeLayout1=0x7f070000;
+        public static final int button_browse=0x7f07000a;
         public static final int button_calendar=0x7f070009;
+        public static final int button_contact=0x7f07000b;
         public static final int button_radio=0x7f070008;
         public static final int calendarpanel=0x7f070003;
         public static final int content_fragment=0x7f070002;
@@ -37,10 +37,12 @@ public final class R {
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int calendar_fragment=0x7f030001;
-        public static final int content_fragment=0x7f030002;
-        public static final int radio_fragment=0x7f030003;
-        public static final int tabs_fragment=0x7f030004;
+        public static final int browse_fragment=0x7f030001;
+        public static final int calendar_fragment=0x7f030002;
+        public static final int contact_fragment=0x7f030003;
+        public static final int content_fragment=0x7f030004;
+        public static final int radio_fragment=0x7f030005;
+        public static final int tabs_fragment=0x7f030006;
     }
     public static final class menu {
         public static final int activity_main=0x7f060000;
