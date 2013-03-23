@@ -15,11 +15,28 @@
         android:textColor="#FFFFFF" >
 
     </TextView>
-
-    <MediaController
-        android:id="@+id/radio_controller"
+    <ToggleButton
+        android:id="@+id/playPause"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    </MediaController>
+        android:layout_height="wrap_content"
+        android:text="ToggleButton"
+        android:visibility="invisible" />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    xmlns:tools="http://schemas.android.com/tools"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:background="#000000"
+	    android:orientation="vertical"
+	    android:padding="2dp" >
 
+	    <ProgressBar
+	        android:id="@+id/preparing_bar"
+	        style="?android:attr/progressBarStyleLarge"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="162dp" />
+
+	</RelativeLayout>
 </LinearLayout>
