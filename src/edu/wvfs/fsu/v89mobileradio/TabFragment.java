@@ -1,7 +1,6 @@
 package edu.wvfs.fsu.v89mobileradio;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ public class TabFragment extends android.support.v4.app.Fragment {
 	@Override
 	 public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	  Bundle savedInstanceState) {
-	  final FragmentActivity act = this.getActivity();
 	  final View myFragmentView = inflater.inflate(R.layout.tabs_fragment, container, false);
 	  ImageButton radiobutton = (ImageButton)myFragmentView.findViewById(R.id.button_radio);
 	  radiobutton.setOnClickListener(new OnClickListener() {

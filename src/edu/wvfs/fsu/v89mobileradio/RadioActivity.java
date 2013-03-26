@@ -1,22 +1,27 @@
 package edu.wvfs.fsu.v89mobileradio;
 
-import java.io.IOException;
-
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnPreparedListener;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
-import android.widget.MediaController;
-public class RadioActivity extends FragmentActivity implements OnPreparedListener, MediaController.MediaPlayerControl {
-	
-	private MediaController mc;
-    private MediaPlayer mp;
-    private Handler handler = new Handler();
-    
+import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ProgressBar;
+import android.widget.RemoteViews;
+import android.widget.ToggleButton;
+
+
+public class RadioActivity extends FragmentActivity implements TaskPrepared {
+	private Notification bgNote;
+	private NotificationManager nm;
+	private ToggleButton play;
+	private MobileRadioApplication myApp;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,113 +30,65 @@ public class RadioActivity extends FragmentActivity implements OnPreparedListene
 		FragmentManager fm = getSupportFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
 		ft.replace(R.id.content_fragment, new RadioFragment());
+		myApp = (MobileRadioApplication)getApplication();
 		ft.commit();
-		
-		mp = new MediaPlayer();
-		mp.setOnPreparedListener(this);
-	    mc = new MyMediaController(this);
-		new Thread(new Runnable(){
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				try {
-					mp.setDataSource("http://voice.wvfs.fsu.edu:8000/stream");
-					mp.prepare();
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SecurityException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalStateException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
+		if(myApp.rServ == null || !myApp.rServ.IsPrepared){
+			myApp.rServ = new RadioTask(this);
+			myApp.rServ.execute();
+		} else {
+			onTaskPrepared();
+		}
 			
-		}).start();
+		nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 	}
-	
-	public void onPrepared(MediaPlayer mediaPlayer) {
-	    mc.setMediaPlayer(this);
-	    mc.setAnchorView(findViewById(R.id.RadioLayout));
-        mediaPlayer.start();
-	    handler.post(new Runnable() {
-	      public void run() {
-	        mc.setEnabled(true);
-	        mc.show(0);
-	      }
-	    });
-	  }
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
-
-	@Override
-	public boolean canPause() {
-		// TODO Auto-generated method stub
-		return mp.isPlaying();
+	
+	protected void onPause()
+	{
+		super.onPause();
+		bgNote = new Notification();
+		bgNote.icon = android.R.drawable.stat_notify_sync;
+		Intent intent = new Intent(this, RadioActivity.class);
+        PendingIntent launchIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
+        bgNote.contentIntent = launchIntent;
+		bgNote.contentView = new RemoteViews(this.getPackageName(), R.layout.notification);
+		bgNote.tickerText = "V89 Mobile Playing";
+		nm.notify(1,bgNote);
 	}
-
-	@Override
-	public boolean canSeekBackward() {
-		// TODO Auto-generated method stub
-		return false;
+	
+	protected void onResume()
+	{
+		super.onResume();
+		nm.cancel(1);
 	}
-
+	
 	@Override
-	public boolean canSeekForward() {
+	public void onTaskPrepared() {
 		// TODO Auto-generated method stub
-		return false;
-	}
+		if(play == null)
+		{
+			play = (ToggleButton)findViewById(R.id.playPause);
+			play.setOnCheckedChangeListener(new OnCheckedChangeListener(){
 
-	@Override
-	public int getBufferPercentage() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getCurrentPosition() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getDuration() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public boolean isPlaying() {
-		return mp.isPlaying();
-	}
-
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		mp.pause();
-	}
-
-	@Override
-	public void seekTo(int pos) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void start() {
-		// TODO Auto-generated method stub
-		mp.start();
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView,
+						boolean isChecked) {
+					if(isChecked) 
+						myApp.rServ.resumeMusic();
+					else
+						myApp.rServ.pauseMusic();
+				}
+				
+			});
+		}
+		ProgressBar loader = (ProgressBar)findViewById(R.id.preparing_bar);
+		play.setVisibility(View.VISIBLE);
+		loader.setVisibility(View.GONE);
 	}
 
 }
