@@ -27,7 +27,7 @@
 		            style="@style/Tabs"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
-		            android:src="@drawable/tab_icon_radio"
+		            android:src="@drawable/tab_icon_list"
 		            android:contentDescription="@string/button_description" />
 		
 		        <ImageButton
