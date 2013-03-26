@@ -1,19 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>    
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/calendarpanel"
-    android:layout_width="fill_parent"
-    android:layout_height="match_parent"
-    android:background="#000000"
-    android:orientation="vertical"
-    android:padding="2dp" >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Contact"
-        android:textColor="#FFFFFF" >
-    </TextView>
-
-
-</LinearLayout>
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:id="@+id/calendarpanel"
+     android:layout_width="fill_parent"
+     android:layout_height="match_parent"
+     android:background="#000000"
+     android:orientation="vertical"
+     android:padding="2dp" >    
+    
+     <ImageView
+        android:id="@+id/imageView1"
+         android:layout_width="match_parent"
+         android:layout_height="234dp"
+         android:contentDescription="contact background"
+         android:src="@drawable/ic_contact_background" />
+ 
+     <!--PROGRAMMING CONTACT INFO -->
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="For programming inquiries:\npd@wvfs.fsu.edu"
+         android:autoLink="email"
+         android:textColor="#22d1ca"
+         android:textColorLink="#7dede9" />
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="850-644-3872" 
+         android:autoLink="phone"
+         android:textColorLink="#7dede9" />
+     
+     <!--MUSIC SUBMISSION CONTACT INFO -->
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="\nFor music submission inquiries:\nmd@wvfs.fsu.edu"
+         android:autoLink="email"
+         android:textColor="#22d1ca"
+         android:textColorLink="#7dede9" />
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="850-644-1879" 
+         android:autoLink="phone"
+         android:textColorLink="#7dede9" />
+     
+     
+     <!--MISHA CONTACT INFO -->
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="\nFor general inquiries:\nMisha H. Laurents, Ph.D.\nFaculty Program Director/GM\nmisha@wvfs.fsu.edu" 
+        android:autoLink="email"
+         android:textColor="#22d1ca"
+         android:textColorLink="#7dede9" />  
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="850-644-9692" 
+         android:autoLink="phone"
+         android:textColorLink="#7dede9" />
+      
+ </LinearLayout>
