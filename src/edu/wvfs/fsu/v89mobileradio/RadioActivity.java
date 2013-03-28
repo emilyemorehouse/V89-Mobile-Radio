@@ -20,7 +20,6 @@ import android.widget.ToggleButton;
 public class RadioActivity extends FragmentActivity implements TaskPrepared {
 	private Notification bgNote;
 	private NotificationManager nm;
-	private ToggleButton play;
 	private MobileRadioApplication myApp;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +34,8 @@ public class RadioActivity extends FragmentActivity implements TaskPrepared {
 		if(myApp.rServ == null || !myApp.rServ.IsPrepared){
 			myApp.rServ = new RadioTask(this);
 			myApp.rServ.execute();
-		} else {
-			onTaskPrepared();
 		}
-			
+		
 		nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 	}
 	@Override
@@ -51,8 +48,9 @@ public class RadioActivity extends FragmentActivity implements TaskPrepared {
 	protected void onPause()
 	{
 		super.onPause();
+		if(!myApp.rServ.isPlaying()) return;
 		bgNote = new Notification();
-		bgNote.icon = android.R.drawable.stat_notify_sync;
+		bgNote.icon = R.drawable.ic_stat_notify;
 		Intent intent = new Intent(this, RadioActivity.class);
         PendingIntent launchIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
         bgNote.contentIntent = launchIntent;
@@ -70,25 +68,8 @@ public class RadioActivity extends FragmentActivity implements TaskPrepared {
 	@Override
 	public void onTaskPrepared() {
 		// TODO Auto-generated method stub
-		if(play == null)
-		{
-			play = (ToggleButton)findViewById(R.id.playPause);
-			play.setOnCheckedChangeListener(new OnCheckedChangeListener(){
-
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView,
-						boolean isChecked) {
-					if(isChecked) 
-						myApp.rServ.resumeMusic();
-					else
-						myApp.rServ.pauseMusic();
-				}
-				
-			});
-		}
-		ProgressBar loader = (ProgressBar)findViewById(R.id.preparing_bar);
-		play.setVisibility(View.VISIBLE);
-		loader.setVisibility(View.GONE);
+		myApp.play.setVisibility(View.VISIBLE);
+		myApp.loader.setVisibility(View.GONE);
 	}
 
 }

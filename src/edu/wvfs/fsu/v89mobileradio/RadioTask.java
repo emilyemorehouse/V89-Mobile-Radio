@@ -67,7 +67,9 @@ public class RadioTask extends AsyncTask<Void, Void, Void> implements MediaPlaye
 		mPlayer.release();
 		mPlayer = null;
 	}
-
+	public boolean isPlaying()
+	{ return mPlayer.isPlaying(); }
+	
 	@Override
 	public boolean onError(MediaPlayer mp, int what, int extra) {
 		// TODO Auto-generated method stub
