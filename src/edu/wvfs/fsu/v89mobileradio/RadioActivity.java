@@ -1,26 +1,37 @@
 package edu.wvfs.fsu.v89mobileradio;
 
+import edu.wvfs.fsu.v89mobileradio.MobileRadioApplication.ConnectStatus;
+import edu.wvfs.fsu.v89mobileradio.MobileRadioApplication.ErrorType;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ProgressBar;
 import android.widget.RemoteViews;
-import android.widget.ToggleButton;
+import android.widget.Toast;
 
 
-public class RadioActivity extends FragmentActivity implements TaskPrepared {
+public class RadioActivity extends FragmentActivity implements TaskInterface {
 	private Notification bgNote;
 	private NotificationManager nm;
 	private MobileRadioApplication myApp;
+	private boolean isNetworkAvailable() {
+		ConnectivityManager conMgr = (ConnectivityManager) getSystemService (Context.CONNECTIVITY_SERVICE);
+		if (conMgr.getActiveNetworkInfo() != null
+		&& conMgr.getActiveNetworkInfo().isAvailable()
+		&& conMgr.getActiveNetworkInfo().isConnected()) {
+		return true;
+
+		} else return false;
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,12 +42,18 @@ public class RadioActivity extends FragmentActivity implements TaskPrepared {
 		ft.replace(R.id.content_fragment, new RadioFragment());
 		myApp = (MobileRadioApplication)getApplication();
 		ft.commit();
+		
+		nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		if(!isNetworkAvailable())
+		{
+			myApp.status = ConnectStatus.NoNetwork;
+			Toast.makeText(getBaseContext(), "No network connection", Toast.LENGTH_SHORT).show();
+			return;
+		}
 		if(myApp.rServ == null || !myApp.rServ.IsPrepared){
 			myApp.rServ = new RadioTask(this);
 			myApp.rServ.execute();
 		}
-		
-		nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -48,7 +65,7 @@ public class RadioActivity extends FragmentActivity implements TaskPrepared {
 	protected void onPause()
 	{
 		super.onPause();
-		if(!myApp.rServ.isPlaying()) return;
+		if(myApp.rServ == null || !myApp.rServ.isPlaying()) return;
 		bgNote = new Notification();
 		bgNote.icon = R.drawable.ic_stat_notify;
 		Intent intent = new Intent(this, RadioActivity.class);
@@ -68,8 +85,26 @@ public class RadioActivity extends FragmentActivity implements TaskPrepared {
 	@Override
 	public void onTaskPrepared() {
 		// TODO Auto-generated method stub
+		myApp.status = ConnectStatus.Connected;
 		myApp.play.setVisibility(View.VISIBLE);
 		myApp.loader.setVisibility(View.GONE);
 	}
+	@Override
+	public void onTaskError(final ErrorType type) {
+		// TODO Auto-generated method stub
+		myApp.status = ConnectStatus.Error;
+		this.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				myApp.reconnect.setVisibility(View.VISIBLE);
+				myApp.loader.setVisibility(View.GONE);
+				// TODO Auto-generated method stub
+				if(type == ErrorType.ConnectError)
+					Toast.makeText(getBaseContext(), "Error connecting to V89", Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
+	
+	
 
 }
