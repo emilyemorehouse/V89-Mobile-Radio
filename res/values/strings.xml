@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">V89 Mobile Radio</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="notification_text">V89 Mobile Radio - Streaming</string>
+    
     <string name="menu_settings">Settings</string>
     <string name="button_description">Nav Button</string>
+    
     <string name="calendar_text">V89 Station Schedule:\n(schedule here)</string>
-
+	<string name="donate_text1">Any donations are much appreciated and help keep this station running!</string>
+	<string name="donate_text2">
+	    PayPal account is NOT required
+	    \nclick "Pay With Card" near the bottom
+	</string>
+	<string name="contact_programmingEmail">
+	    For programming inquiries:
+	    \npd@wvfs.fsu.edu
+	</string>
+	<string name="contact_programmingPhone">(850) 644 3872</string>
+	<string name="contact_submissionEmail">
+	    For music submission inquiries:
+	    \nmd@wvfs.fsu.edu
+	</string>
+	<string name="contact_submissionPhone">(850) 644 1879</string>
+	<string name="contact_mishaEmail">
+	    For general inquiries:
+	    \nMisha H. Laurents, Ph.D.
+	    \nFaculty Program Director/GM
+	    \nmisha@wvfs.fsu.edu
+	</string>
+	<string name="contact_mishaPhone">(850) 644 9692</string>
+	<string name="contentDesc"></string>
 
 
 	<style name="ButtonText">

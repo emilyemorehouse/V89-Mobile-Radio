@@ -69,6 +69,20 @@ public class TabFragment extends android.support.v4.app.Fragment {
 			
 		});
 	  
+	  ImageButton donatebutton = (ImageButton)myFragmentView.findViewById(R.id.button_donate);
+	  donatebutton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if(currentTab == 4) return;
+				FragmentTransaction ft = getFragmentManager().beginTransaction();
+				ft.replace(R.id.content_fragment, new DonateFragment());
+				currentTab = 4;
+				ft.commit();
+			}
+			
+		});
+	  
 	  return myFragmentView;
 	 }
 }

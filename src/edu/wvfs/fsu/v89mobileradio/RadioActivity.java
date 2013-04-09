@@ -2,6 +2,7 @@ package edu.wvfs.fsu.v89mobileradio;
 
 import edu.wvfs.fsu.v89mobileradio.MobileRadioApplication.ConnectStatus;
 import edu.wvfs.fsu.v89mobileradio.MobileRadioApplication.ErrorType;
+import android.support.v4.app.NotificationCompat;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -66,13 +67,16 @@ public class RadioActivity extends FragmentActivity implements TaskInterface {
 	{
 		super.onPause();
 		if(myApp.rServ == null || !myApp.rServ.isPlaying()) return;
-		bgNote = new Notification();
-		bgNote.icon = R.drawable.ic_stat_notify;
 		Intent intent = new Intent(this, RadioActivity.class);
         PendingIntent launchIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
-        bgNote.contentIntent = launchIntent;
-		bgNote.contentView = new RemoteViews(this.getPackageName(), R.layout.notification);
-		bgNote.tickerText = "V89 Mobile Playing";
+        RemoteViews rv = new RemoteViews(this.getPackageName(), R.layout.notification);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+        .setContentIntent(launchIntent)
+        .setTicker("V89 Mobile Playing", rv)
+        .setSmallIcon(R.drawable.ic_stat_notify)
+        .setContent(rv)
+        .setOngoing(true);
+		bgNote = builder.build();
 		nm.notify(1,bgNote);
 	}
 	

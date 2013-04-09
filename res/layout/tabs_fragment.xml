@@ -29,5 +29,10 @@
 		            style="@style/Tabs"
 		            android:src="@drawable/tab_icon_radio"
 		            android:contentDescription="@string/button_description" />
+		        <ImageButton
+		            android:id="@+id/button_donate"
+		            style="@style/Tabs"
+		            android:src="@drawable/tab_icon_radio"
+		            android:contentDescription="@string/button_description" />
 
             </LinearLayout>
