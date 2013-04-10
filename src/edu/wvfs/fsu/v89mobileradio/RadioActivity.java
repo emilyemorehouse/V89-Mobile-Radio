@@ -1,5 +1,12 @@
 package edu.wvfs.fsu.v89mobileradio;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+
 import edu.wvfs.fsu.v89mobileradio.MobileRadioApplication.ConnectStatus;
 import edu.wvfs.fsu.v89mobileradio.MobileRadioApplication.ErrorType;
 import android.support.v4.app.NotificationCompat;
@@ -8,6 +15,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -15,7 +24,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.View;
-import android.widget.RemoteViews;
 import android.widget.Toast;
 
 
@@ -55,6 +63,8 @@ public class RadioActivity extends FragmentActivity implements TaskInterface {
 			myApp.rServ = new RadioTask(this);
 			myApp.rServ.execute();
 		}
+		
+		InitDatabase();
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -69,12 +79,12 @@ public class RadioActivity extends FragmentActivity implements TaskInterface {
 		if(myApp.rServ == null || !myApp.rServ.isPlaying()) return;
 		Intent intent = new Intent(this, RadioActivity.class);
         PendingIntent launchIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
-        RemoteViews rv = new RemoteViews(this.getPackageName(), R.layout.notification);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
         .setContentIntent(launchIntent)
-        .setTicker("V89 Mobile Playing", rv)
+        .setTicker("V89 Mobile Radio - Streaming")
         .setSmallIcon(R.drawable.ic_stat_notify)
-        .setContent(rv)
+        .setContentTitle("V89 Mobile Radio")
+        .setContentText("Streaming")
         .setOngoing(true);
 		bgNote = builder.build();
 		nm.notify(1,bgNote);
@@ -109,6 +119,40 @@ public class RadioActivity extends FragmentActivity implements TaskInterface {
 		});
 	}
 	
+	private void InitDatabase()
+	{
+    	// Path to the just created empty db
+    	String outFileName = getFilesDir().getPath()+"/test.db";
+		File f = new File(outFileName);
+		if(!f.exists())
+		{
+			try{
+		    	InputStream myInput = getAssets().open("test.db");
+		    	OutputStream myOutput = new FileOutputStream(outFileName);
 	
-
+		    	byte[] buffer = new byte[1024];
+		    	int length;
+		    	while ((length = myInput.read(buffer))>0){
+		    		myOutput.write(buffer, 0, length);
+		    	}
+		 
+		    	//Close the streams
+		    	myOutput.flush();
+		    	myOutput.close();
+		    	myInput.close();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+	    	
+		}
+		
+		SQLiteDatabase db = SQLiteDatabase.openDatabase(outFileName, null, 0);
+		Cursor c = db.rawQuery("select rowid,name from artist", null);
+		if(!c.moveToFirst()) return;
+		myApp.artists.add(Artist.FromCursor(c,db));
+		while(c.moveToNext())
+			myApp.artists.add(Artist.FromCursor(c,db));
+		
+	}
 }
+	
