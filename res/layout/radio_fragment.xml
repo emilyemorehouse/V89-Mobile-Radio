@@ -8,34 +8,58 @@
     android:orientation="vertical"
     android:padding="2dp" >
 
-    <Button
-        android:id="@+id/reconnect_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:text="Try Reconnect" />
-
-    <ToggleButton
-        android:id="@+id/playPause"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ToggleButton"
-        android:visibility="invisible" />
-    <RelativeLayout
+	<LinearLayout
+    	android:id="@+id/connected_content"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:background="#000000"
 	    android:orientation="vertical"
-	    android:padding="2dp" >
+	    android:padding="2dp"
+	    android:visibility="gone" >
+
+	   	<TextView
+	   	    android:id="@+id/textView1"
+	   	    android:layout_width="wrap_content"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_gravity="center"
+	   	    android:layout_marginBottom="17dp"
+	   	    android:text="@string/nowplaying"
+	   	    android:textAppearance="?android:attr/textAppearanceLarge"
+	   	    android:textColor="#ffffff"
+	   	    android:textSize="30sp" />
+
+	   	<CheckBox
+	   	    android:id="@+id/playPause"
+	   	    style="@style/PlayButton"
+	   	    android:layout_width="wrap_content"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_gravity="center"
+	   	    android:layout_marginTop="120dp" />
+
+   	</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/disconnected_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#000000"
+        android:orientation="vertical"
+        android:padding="2dp" >
 
 	    <ProgressBar
 	        android:id="@+id/preparing_bar"
 	        style="?android:attr/progressBarStyleLarge"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_alignParentTop="true"
-	        android:layout_centerHorizontal="true"
-	        android:layout_marginTop="162dp" />
+	        android:layout_gravity="center"
+	        android:layout_marginTop="120dp" />
 
-	</RelativeLayout>
+	    <Button
+	        android:id="@+id/reconnect_button"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:text="@string/reconnect" android:visibility="gone"/>
+
+	</LinearLayout>
 </LinearLayout>

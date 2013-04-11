@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">V89 Mobile Radio</string>
     <string name="notification_text">V89 Mobile Radio - Streaming</string>
+    <string name="nowplaying">Now Playing</string>
     
     <string name="menu_settings">Settings</string>
     <string name="button_description">Nav Button</string>
@@ -30,22 +31,7 @@
 	</string>
 	<string name="contact_mishaPhone">(850) 644 9692</string>
 	<string name="contentDesc"></string>
-
-
-	<style name="ButtonText">
-	    <item name="android:layout_width">fill_parent</item>
-	    <item name="android:layout_height">wrap_content</item>
-	    <item name="android:textColor">#ffffff</item>
-	    <item name="android:gravity">center</item>
-	    <item name="android:layout_margin">0dp</item>
-	    <item name="android:textSize">30sp</item>
-	    <item name="android:textStyle">bold</item>
-	    <item name="android:shadowColor">#000000</item>
-	    <item name="android:shadowDx">1</item>
-	    <item name="android:shadowDy">1</item>
-	    <item name="android:shadowRadius">2</item>
-	</style>
-	
+	<string name="reconnect">Try Reconnect</string>
 	
 
 </resources>

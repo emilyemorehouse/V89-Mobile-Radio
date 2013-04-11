@@ -6,14 +6,16 @@ import android.app.Application;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.ToggleButton;
-
 public class MobileRadioApplication extends Application{
 	public RadioTask rServ;
-	public ToggleButton play;
+	public CheckBox play;
 	public ProgressBar loader;
 	public Button reconnect;
+	public LinearLayout conContent;
+	public LinearLayout disconContent;
 	public ConnectStatus status = ConnectStatus.NotConnected;
 	public ArrayList<Artist> artists = new ArrayList<Artist>();
 	public enum ErrorType {
@@ -36,6 +38,7 @@ public class MobileRadioApplication extends Application{
 		albums.add(Album.FromCursor(c, db));
 		while(c.moveToNext())
 			albums.add(Album.FromCursor(c, db));
+		c.close();
 		return albums;
 	}
 	
@@ -47,6 +50,7 @@ public class MobileRadioApplication extends Application{
 		songs.add(Song.FromCursor(c,db));
 		while(c.moveToNext())
 			songs.add(Song.FromCursor(c,db));
+		c.close();
 		return songs;
 	}
 }

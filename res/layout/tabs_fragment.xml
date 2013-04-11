@@ -34,5 +34,16 @@
 		            style="@style/Tabs"
 		            android:src="@drawable/tab_icon_radio"
 		            android:contentDescription="@string/button_description" />
+		        <LinearLayout
+		            android:layout_width="wrap_content"
+				    android:layout_height="fill_parent"
+				    style="@style/Tabs"
+				    android:gravity="bottom">
+			        <ImageView
+			            android:id="@+id/logo_image_tab"
+			            style="@style/Tabs"
+			            android:src="@drawable/ic_launcher"
+			            android:contentDescription="@string/button_description" />
+		        </LinearLayout>
 
             </LinearLayout>

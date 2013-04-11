@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 
 import edu.wvfs.fsu.v89mobileradio.MobileRadioApplication.ConnectStatus;
 import edu.wvfs.fsu.v89mobileradio.MobileRadioApplication.ErrorType;
@@ -98,21 +97,19 @@ public class RadioActivity extends FragmentActivity implements TaskInterface {
 	
 	@Override
 	public void onTaskPrepared() {
-		// TODO Auto-generated method stub
 		myApp.status = ConnectStatus.Connected;
-		myApp.play.setVisibility(View.VISIBLE);
-		myApp.loader.setVisibility(View.GONE);
+		myApp.disconContent.setVisibility(View.GONE);
+		myApp.conContent.setVisibility(View.VISIBLE);
 	}
 	@Override
 	public void onTaskError(final ErrorType type) {
-		// TODO Auto-generated method stub
 		myApp.status = ConnectStatus.Error;
 		this.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
+				myApp.disconContent.setVisibility(View.VISIBLE);
 				myApp.reconnect.setVisibility(View.VISIBLE);
 				myApp.loader.setVisibility(View.GONE);
-				// TODO Auto-generated method stub
 				if(type == ErrorType.ConnectError)
 					Toast.makeText(getBaseContext(), "Error connecting to V89", Toast.LENGTH_SHORT).show();
 			}
@@ -152,6 +149,9 @@ public class RadioActivity extends FragmentActivity implements TaskInterface {
 		myApp.artists.add(Artist.FromCursor(c,db));
 		while(c.moveToNext())
 			myApp.artists.add(Artist.FromCursor(c,db));
+		
+		c.close();
+		db.close();
 		
 	}
 }

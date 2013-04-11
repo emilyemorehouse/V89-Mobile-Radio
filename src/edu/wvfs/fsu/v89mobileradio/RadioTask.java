@@ -89,7 +89,6 @@ public class RadioTask extends AsyncTask<Void, Void, Void> implements MediaPlaye
 	//showing of play/pause button, removal of loading icon
 	@Override
 	public void onPrepared(MediaPlayer mp) {
-		// TODO Auto-generated method stub
 		listener.onTaskPrepared();
 		IsPrepared = true;
 	}

@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
-import android.widget.ToggleButton;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class RadioFragment extends android.support.v4.app.Fragment {
@@ -17,16 +18,16 @@ public class RadioFragment extends android.support.v4.app.Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		View myFragmentView = inflater.inflate(R.layout.radio_fragment,
 				container, false);
 		final MobileRadioApplication myApp = (MobileRadioApplication) getActivity()
 				.getApplication();
-		myApp.reconnect = (Button)myFragmentView.findViewById(R.id.reconnect_button);
+		myApp.reconnect = (Button) myFragmentView.findViewById(R.id.reconnect_button);
 		myApp.loader = (ProgressBar) myFragmentView
 				.findViewById(R.id.preparing_bar);
-		myApp.play = (ToggleButton) myFragmentView.findViewById(R.id.playPause);
-
+		myApp.play = (CheckBox) myFragmentView.findViewById(R.id.playPause);
+		myApp.conContent = (LinearLayout) myFragmentView.findViewById(R.id.connected_content);
+		myApp.disconContent = (LinearLayout) myFragmentView.findViewById(R.id.disconnected_content);
 		if (myApp.rServ != null && myApp.rServ.isPlaying())
 			myApp.play.toggle();
 		myApp.play.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -49,18 +50,19 @@ public class RadioFragment extends android.support.v4.app.Fragment {
 				TaskInterface fa = (TaskInterface)getActivity();
 				myApp.rServ = new RadioTask(fa);
 				myApp.rServ.execute();
-				myApp.loader.setVisibility(View.VISIBLE);
 				myApp.reconnect.setVisibility(View.GONE);
+				myApp.loader.setVisibility(View.VISIBLE);
 			}
 
 		});
 
 		if (myApp.status == ConnectStatus.Connected) {
-			myApp.play.setVisibility(View.VISIBLE);
-			myApp.loader.setVisibility(View.GONE);
+			myApp.disconContent.setVisibility(View.GONE);
+			myApp.conContent.setVisibility(View.VISIBLE);
 		} else if (myApp.status == ConnectStatus.Error || myApp.status == ConnectStatus.NoNetwork) {
-			myApp.play.setVisibility(View.GONE);
+			myApp.conContent.setVisibility(View.GONE);
 			myApp.loader.setVisibility(View.GONE);
+			myApp.disconContent.setVisibility(View.VISIBLE);
 			myApp.reconnect.setVisibility(View.VISIBLE);
 		}
 		return myFragmentView;
