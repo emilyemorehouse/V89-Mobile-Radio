@@ -146,9 +146,9 @@ public class RadioActivity extends FragmentActivity implements TaskInterface {
 		SQLiteDatabase db = SQLiteDatabase.openDatabase(outFileName, null, 0);
 		Cursor c = db.rawQuery("select rowid,name from artist", null);
 		if(!c.moveToFirst()) return;
-		myApp.artists.add(Artist.FromCursor(c,db));
+		MobileRadioApplication.artists.add(Artist.FromCursor(c,db));
 		while(c.moveToNext())
-			myApp.artists.add(Artist.FromCursor(c,db));
+			MobileRadioApplication.artists.add(Artist.FromCursor(c,db));
 		
 		c.close();
 		db.close();

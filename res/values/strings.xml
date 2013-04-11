@@ -3,6 +3,13 @@
     <string name="app_name">V89 Mobile Radio</string>
     <string name="notification_text">V89 Mobile Radio - Streaming</string>
     <string name="nowplaying">Now Playing</string>
+    <string name="browsemusic">Browse Music</string>
+    <string name="search">Search</string>
+    <string-array name="searchby_list">
+        <item>Artist</item>
+        <item>Album</item>
+        <item>Title</item>
+    </string-array>
     
     <string name="menu_settings">Settings</string>
     <string name="button_description">Nav Button</string>

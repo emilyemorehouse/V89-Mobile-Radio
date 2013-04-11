@@ -17,7 +17,9 @@ public class MobileRadioApplication extends Application{
 	public LinearLayout conContent;
 	public LinearLayout disconContent;
 	public ConnectStatus status = ConnectStatus.NotConnected;
-	public ArrayList<Artist> artists = new ArrayList<Artist>();
+	public static ArrayList<Artist> artists = new ArrayList<Artist>();
+	public static ArrayList<Album> albums = new ArrayList<Album>();
+	public static ArrayList<Song> songs = new ArrayList<Song>();
 	public enum ErrorType {
 		ConnectError,
 		InterruptError
@@ -30,26 +32,24 @@ public class MobileRadioApplication extends Application{
 		NoNetwork
 	}
 	
-	public static ArrayList<Album> getAlbumsByArtist(int artistId, SQLiteDatabase db)
+	public static ArrayList<Album> getAlbumsByArtist(int artistId, SQLiteDatabase db, Artist ar)
 	{
-		ArrayList<Album> albums = new ArrayList<Album>();
 		Cursor c = db.rawQuery(String.format("select rowid, * from album where artistid=%d",artistId), null);
 		if(!c.moveToFirst()) return albums;
-		albums.add(Album.FromCursor(c, db));
+		albums.add(Album.FromCursor(c, db, ar));
 		while(c.moveToNext())
-			albums.add(Album.FromCursor(c, db));
+			albums.add(Album.FromCursor(c, db, ar));
 		c.close();
 		return albums;
 	}
 	
-	public static ArrayList<Song> getSongsByAlbum(int albumId, SQLiteDatabase db)
+	public static ArrayList<Song> getSongsByAlbum(int albumId, SQLiteDatabase db, Artist ar, Album al)
 	{
-		ArrayList<Song> songs = new ArrayList<Song>();
 		Cursor c = db.rawQuery(String.format("select rowid,* from song where albumid=%d",albumId), null);
 		if(!c.moveToFirst()) return songs;
-		songs.add(Song.FromCursor(c,db));
+		songs.add(Song.FromCursor(c,db, ar, al));
 		while(c.moveToNext())
-			songs.add(Song.FromCursor(c,db));
+			songs.add(Song.FromCursor(c,db, ar, al));
 		c.close();
 		return songs;
 	}

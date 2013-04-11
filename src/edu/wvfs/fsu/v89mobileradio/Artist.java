@@ -17,7 +17,7 @@ public class Artist {
 		Artist artist = new Artist();
 		artist.id = c.getInt(0);
 		artist.name = c.getString(1);
-		artist.albums = MobileRadioApplication.getAlbumsByArtist(artist.id, db);
+		artist.albums = MobileRadioApplication.getAlbumsByArtist(artist.id, db, artist);
 		return artist;
 	}
 }
