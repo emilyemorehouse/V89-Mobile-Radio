@@ -5,3 +5,4 @@ public interface TaskInterface {
 	void onTaskPrepared();
 	void onTaskError(ErrorType type);
 }
+

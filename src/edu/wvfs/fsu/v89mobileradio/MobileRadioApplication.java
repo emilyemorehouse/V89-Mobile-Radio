@@ -19,7 +19,7 @@ public class MobileRadioApplication extends Application{
 	public ConnectStatus status = ConnectStatus.NotConnected;
 	public static ArrayList<Artist> artists = new ArrayList<Artist>();
 	public static ArrayList<Album> albums = new ArrayList<Album>();
-	public static ArrayList<Song> songs = new ArrayList<Song>();
+	public static ArrayList<ListViewCreator> songs = new ArrayList<ListViewCreator>();
 	public enum ErrorType {
 		ConnectError,
 		InterruptError
@@ -43,7 +43,7 @@ public class MobileRadioApplication extends Application{
 		return albums;
 	}
 	
-	public static ArrayList<Song> getSongsByAlbum(int albumId, SQLiteDatabase db, Artist ar, Album al)
+	public static ArrayList<ListViewCreator> getSongsByAlbum(int albumId, SQLiteDatabase db, Artist ar, Album al)
 	{
 		Cursor c = db.rawQuery(String.format("select rowid,* from song where albumid=%d",albumId), null);
 		if(!c.moveToFirst()) return songs;

@@ -38,14 +38,30 @@
 	        android:entries="@array/searchby_list" />
 
 	</LinearLayout>
-		
+	
     <Button
         android:id="@+id/search_button"
         style="@style/Tabs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/search"/>
-
+    <LinearLayout
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:id="@+id/list_header">
+	    
+	    <TextView 
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="0.4"
+		    android:text="@string/artist"/>
+		<TextView 
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="0.6"
+		    android:text="@string/title"/>
+	</LinearLayout>
     <ListView
         android:id="@+id/results_list"
         android:layout_width="match_parent"

@@ -1,14 +1,11 @@
 package edu.wvfs.fsu.v89mobileradio;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -18,46 +15,57 @@ public class BrowseFragment extends android.support.v4.app.Fragment {
 	private EditText query;
 	private Spinner searchby;
 	private ListView resultList;
-	private ArrayAdapter<Song> adapter;
+	private CustomAdapters.Reg adapter;
+	private ArrayList<ListViewCreator> results = new ArrayList<ListViewCreator>();
 	@Override
 	 public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	   Bundle savedInstanceState) {
-	  View myFragmentView = inflater.inflate(R.layout.browse_fragment, container, false);
+	  final View myFragmentView = inflater.inflate(R.layout.browse_fragment, container, false);
 	  search = (Button) myFragmentView.findViewById(R.id.search_button);
 	  query = (EditText) myFragmentView.findViewById(R.id.search_query);
 	  searchby = (Spinner) myFragmentView.findViewById(R.id.searchby);
 	  resultList = (ListView) myFragmentView.findViewById(R.id.results_list);
-	  adapter = new ArrayAdapter<Song>(getActivity().getBaseContext(), android.R.layout.simple_list_item_1, MobileRadioApplication.songs);
+	  adapter = new CustomAdapters.Reg(getActivity().getBaseContext(), android.R.layout.simple_list_item_1, results);
 	  resultList.setAdapter(adapter);
 	  search.setOnClickListener(new OnClickListener(){
-
 		@Override
 		public void onClick(View v) {
 			String text = query.getText().toString();
-			ArrayList<Song> results = new ArrayList<Song>();
 			if(text.length() == 0) return;
 			switch(searchby.getSelectedItemPosition())
 			{
 			case 0:
+				resultList.setAdapter(adapter);
+				SwitchHeader(myFragmentView, 0);
 				results = SearchByArtist(text);
 				break;
 			case 1:
+				SwitchHeader(myFragmentView, 1);
 				results = SearchByAlbum(text);
 				break;
 			case 2:
+				SwitchHeader(myFragmentView, 2);
 				results = SearchByTitle(text);
 				break;
+			default:
+				results = new ArrayList<ListViewCreator>();
 			}
 			
+			adapter.clear();
+			resultList.invalidate();
+			for(ListViewCreator result : results)
+				adapter.add(result);
+			adapter.notifyDataSetChanged();
+		
 		}
 		  
 	  });
 	  return myFragmentView;
 	 }
 	
-	private ArrayList<Song> SearchByArtist(String text)
+	private ArrayList<ListViewCreator> SearchByArtist(String text)
 	{
-		ArrayList<Song> songs = new ArrayList<Song>();
+		ArrayList<ListViewCreator> songs = new ArrayList<ListViewCreator>();
 		for(int i =0; i< MobileRadioApplication.artists.size(); ++i)
 		{
 			Artist ar = MobileRadioApplication.artists.get(i);
@@ -66,40 +74,53 @@ public class BrowseFragment extends android.support.v4.app.Fragment {
 					songs.addAll(ar.albums.get(j).songs);
 				
 		}
-		adapter.clear();
-		for(Song song : songs)
-			adapter.add(song);
 		return songs;			
 	}
 	
-	private ArrayList<Song> SearchByAlbum(String text)
+	private ArrayList<ListViewCreator> SearchByAlbum(String text)
 	{
-		ArrayList<Song> songs = new ArrayList<Song>();
+		ArrayList<ListViewCreator> albums = new ArrayList<ListViewCreator>();
 		for(int i =0; i< MobileRadioApplication.albums.size(); ++i)
 		{
 			Album al = MobileRadioApplication.albums.get(i);
 			if(al.name.toLowerCase().contains(text.toLowerCase()))
-					songs.addAll(al.songs);
+					albums.add(al);
 				
 		}
-		adapter.clear();
-		for(Song song : songs)
-			adapter.add(song);
-		return songs;
+		return albums;
 	}
 	
-	private ArrayList<Song> SearchByTitle(String text)
+	private ArrayList<ListViewCreator> SearchByTitle(String text)
 	{
-		ArrayList<Song> songs = new ArrayList<Song>();
+		ArrayList<ListViewCreator> songs = new ArrayList<ListViewCreator>();
 		for(int i =0; i< MobileRadioApplication.songs.size(); ++i)
 		{
-			if(MobileRadioApplication.songs.get(i).name.toLowerCase().contains(text.toLowerCase()))
+			Song s = (Song) MobileRadioApplication.songs.get(i);
+			if(s.name.toLowerCase().contains(text.toLowerCase()))
 					songs.add(MobileRadioApplication.songs.get(i));
 				
 		}
-		adapter.clear();
-		for(Song song : songs)
-			adapter.add(song);
 		return songs;
+	}
+	
+	private void SwitchHeader(View item, int type)
+	{
+		View C = item.findViewById(R.id.list_header);
+	    ViewGroup parent = (ViewGroup) C.getParent();
+	    int index = parent.indexOfChild(C);
+	    parent.removeView(C);
+	    //switch here
+	    switch(type)
+	    {
+	    case 0:
+	    	break;
+	    case 1:
+		    C = Album.createHeaderView(getActivity().getBaseContext());
+	    	break;
+	    case 2:
+		    C = Song.createHeaderView(getActivity().getBaseContext());
+	    	break;
+	    }
+	    parent.addView(C, index);
 	}
 }

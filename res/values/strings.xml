@@ -5,10 +5,14 @@
     <string name="nowplaying">Now Playing</string>
     <string name="browsemusic">Browse Music</string>
     <string name="search">Search</string>
+    <string name="artist">Artist</string>
+    <string name="album">Album</string>
+    <string name="title">Title</string>
+    
     <string-array name="searchby_list">
-        <item>Artist</item>
-        <item>Album</item>
-        <item>Title</item>
+        <item>@string/artist</item>
+        <item>@string/album</item>
+        <item>@string/title</item>
     </string-array>
     
     <string name="menu_settings">Settings</string>
