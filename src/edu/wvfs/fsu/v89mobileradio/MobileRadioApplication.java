@@ -19,6 +19,7 @@ public class MobileRadioApplication extends Application{
 	public LinearLayout conContent;
 	public LinearLayout disconContent;
 	public ConnectStatus status = ConnectStatus.NotConnected;
+	public boolean dbInit = false;
 	public static ArrayList<ListViewCreator> artists = new ArrayList<ListViewCreator>();
 	public static ArrayList<ListViewCreator> albums = new ArrayList<ListViewCreator>();
 	public static ArrayList<ListViewCreator> songs = new ArrayList<ListViewCreator>();

@@ -51,7 +51,11 @@ public class RadioActivity extends FragmentActivity implements TaskInterface {
 		myApp = (MobileRadioApplication)getApplication();
 		ft.commit();
 		
-		InitDatabase();
+		if(myApp.dbInit == false)
+		{
+			InitDatabase();
+			myApp.dbInit = true;
+		}
 		
 		nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		if(!isNetworkAvailable())
