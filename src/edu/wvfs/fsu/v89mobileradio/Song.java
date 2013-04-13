@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,6 +17,12 @@ public class Song implements ListViewCreator {
 	public Artist artist;
 	public Album album;
 	public Song() { }
+	
+	private OnClickListener och = new OnClickListener(){
+		public void onClick(View v) {
+			MobileRadioApplication.RequestSong(Song.this, v.getContext());
+		}
+	};
 	
 	public static Song FromCursor(Cursor c, SQLiteDatabase db, Artist ar, Album al)
 	{
@@ -41,17 +48,17 @@ public class Song implements ListViewCreator {
 		TextView title = new TextView(ctx);
 		title.setText(name);
 		title.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.4f));
-		
+		title.setOnClickListener(och);
 		TextView al = new TextView(ctx);
 		al.setText(album.name);
 		al.setPadding(4, 0, 0, 0);
 		al.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.3f));
-		
+		al.setOnClickListener(och);
 		TextView ar = new TextView(ctx);
 		ar.setText(artist.name);
 		ar.setPadding(4, 0, 0, 0);
 		ar.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.3f));
-		
+		ar.setOnClickListener(och);
 		title.setTextSize(10);
 		al.setTextSize(10);
 		ar.setTextSize(10);
@@ -72,9 +79,10 @@ public class Song implements ListViewCreator {
 		TextView title = new TextView(ctx);
 		title.setText(name);
 		LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.4f);
-		llp.setMargins(8, 0, 0, 0);
+		llp.setMargins(12, 0, 0, 0);
 		title.setLayoutParams(llp);
 		title.setTextSize(10);
+		title.setOnClickListener(och);
 		layout.addView(title);
 	
 		return layout;
@@ -98,10 +106,6 @@ public class Song implements ListViewCreator {
 		ar.setText("Artist");
 		ar.setPadding(4, 0, 0, 0);
 		ar.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.3f));
-		
-		title.setTextSize(10);
-		al.setTextSize(10);
-		ar.setTextSize(10);
 		
 
 		layout.addView(title);

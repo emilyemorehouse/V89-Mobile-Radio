@@ -51,6 +51,8 @@ public class RadioActivity extends FragmentActivity implements TaskInterface {
 		myApp = (MobileRadioApplication)getApplication();
 		ft.commit();
 		
+		InitDatabase();
+		
 		nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		if(!isNetworkAvailable())
 		{
@@ -62,8 +64,6 @@ public class RadioActivity extends FragmentActivity implements TaskInterface {
 			myApp.rServ = new RadioTask(this);
 			myApp.rServ.execute();
 		}
-		
-		InitDatabase();
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

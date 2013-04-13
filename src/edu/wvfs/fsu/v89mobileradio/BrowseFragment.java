@@ -1,6 +1,8 @@
 package edu.wvfs.fsu.v89mobileradio;
 
 import java.util.ArrayList;
+import java.util.Locale;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +33,6 @@ public class BrowseFragment extends android.support.v4.app.Fragment {
 		@Override
 		public void onClick(View v) {
 			String text = query.getText().toString();
-			if(text.length() == 0) return;
 			switch(searchby.getSelectedItemPosition())
 			{
 			case 0:
@@ -65,16 +66,15 @@ public class BrowseFragment extends android.support.v4.app.Fragment {
 	
 	private ArrayList<ListViewCreator> SearchByArtist(String text)
 	{
-		ArrayList<ListViewCreator> songs = new ArrayList<ListViewCreator>();
+		ArrayList<ListViewCreator> artists = new ArrayList<ListViewCreator>();
 		for(int i =0; i< MobileRadioApplication.artists.size(); ++i)
 		{
-			Artist ar = MobileRadioApplication.artists.get(i);
-			if(ar.name.toLowerCase().contains(text.toLowerCase()))
-				for(int j = 0; j < ar.albums.size(); ++j)
-					songs.addAll(ar.albums.get(j).songs);
+			Artist ar = (Artist) MobileRadioApplication.artists.get(i);
+			if(ar.name.toLowerCase(Locale.US).contains(text.toLowerCase()))
+				artists.add(ar);
 				
 		}
-		return songs;			
+		return artists;			
 	}
 	
 	private ArrayList<ListViewCreator> SearchByAlbum(String text)
@@ -82,8 +82,8 @@ public class BrowseFragment extends android.support.v4.app.Fragment {
 		ArrayList<ListViewCreator> albums = new ArrayList<ListViewCreator>();
 		for(int i =0; i< MobileRadioApplication.albums.size(); ++i)
 		{
-			Album al = MobileRadioApplication.albums.get(i);
-			if(al.name.toLowerCase().contains(text.toLowerCase()))
+			Album al = (Album) MobileRadioApplication.albums.get(i);
+			if(al.name.toLowerCase(Locale.US).contains(text.toLowerCase()))
 					albums.add(al);
 				
 		}
@@ -96,7 +96,7 @@ public class BrowseFragment extends android.support.v4.app.Fragment {
 		for(int i =0; i< MobileRadioApplication.songs.size(); ++i)
 		{
 			Song s = (Song) MobileRadioApplication.songs.get(i);
-			if(s.name.toLowerCase().contains(text.toLowerCase()))
+			if(s.name.toLowerCase(Locale.US).contains(text.toLowerCase()))
 					songs.add(MobileRadioApplication.songs.get(i));
 				
 		}
@@ -113,6 +113,7 @@ public class BrowseFragment extends android.support.v4.app.Fragment {
 	    switch(type)
 	    {
 	    case 0:
+	    	C = Artist.createHeaderView(getActivity().getBaseContext());
 	    	break;
 	    case 1:
 		    C = Album.createHeaderView(getActivity().getBaseContext());
