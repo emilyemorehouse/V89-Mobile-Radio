@@ -53,7 +53,7 @@ public class Artist implements ListViewCreator {
 		title.setOnClickListener(titleClick);
 		title.setText(name);
 		title.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
-		
+		title.setTextSize(20);
 		for(ListViewCreator s : albums)
 			list.addView(s.createExpandableView(ctx));
 		
@@ -77,6 +77,7 @@ public class Artist implements ListViewCreator {
 		TextView title = new TextView(ctx);
 		title.setText("Name");
 		title.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1f));
+		title.setTextSize(20);
 		layout.addView(title);
 		layout.setId(R.id.list_header);
 		return layout;

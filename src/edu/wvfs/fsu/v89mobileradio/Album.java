@@ -66,8 +66,8 @@ public class Album implements ListViewCreator{
 		al.setPadding(4, 0, 0, 0);
 		al.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.5f));
 				
-		title.setTextSize(10);
-		al.setTextSize(10);
+		title.setTextSize(20);
+		al.setTextSize(20);
 		
 		inner.addView(title);
 		inner.addView(al);
@@ -106,8 +106,8 @@ public class Album implements ListViewCreator{
 		title.setOnClickListener(titleClick);
 		title.setText(name);
 		title.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
-		title.setPadding(12, 0, 0, 0);
-		title.setTextSize(10);
+		title.setPadding(18, 0, 0, 0);
+		title.setTextSize(18);
 		inner.addView(title);
 		layout.addView(inner);
 		layout.addView(list);
@@ -123,10 +123,12 @@ public class Album implements ListViewCreator{
 		TextView title = new TextView(ctx);
 		title.setText("Name");
 		title.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.5f));
+		title.setTextSize(20);
 		
 		TextView al = new TextView(ctx);
 		al.setText("Artist");
 		al.setPadding(4, 0, 0, 0);
+		al.setTextSize(20);
 		al.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.5f));
 		
 
