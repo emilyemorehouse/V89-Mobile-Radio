@@ -47,25 +47,18 @@ public class Song implements ListViewCreator {
 		
 		TextView title = new TextView(ctx);
 		title.setText(name);
-		title.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.4f));
+		title.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.6f));
 		title.setOnClickListener(och);
-		TextView al = new TextView(ctx);
-		al.setText(album.name);
-		al.setPadding(4, 0, 0, 0);
-		al.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.3f));
-		al.setOnClickListener(och);
 		TextView ar = new TextView(ctx);
 		ar.setText(artist.name);
 		ar.setPadding(4, 0, 0, 0);
-		ar.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.3f));
+		ar.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.4f));
 		ar.setOnClickListener(och);
-		title.setTextSize(20);
-		al.setTextSize(20);
-		ar.setTextSize(20);
+		title.setTextSize(16);
+		ar.setTextSize(16);
 		
 
 		layout.addView(title);
-		layout.addView(al);
 		layout.addView(ar);
 		
 		return layout;
@@ -79,9 +72,9 @@ public class Song implements ListViewCreator {
 		TextView title = new TextView(ctx);
 		title.setText(name);
 		LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.4f);
-		llp.setMargins(24, 0, 0, 0);
+		llp.setMargins(18, 0, 0, 0);
 		title.setLayoutParams(llp);
-		title.setTextSize(16);
+		title.setTextSize(14);
 		title.setOnClickListener(och);
 		layout.addView(title);
 	
@@ -95,23 +88,17 @@ public class Song implements ListViewCreator {
 		
 		TextView title = new TextView(ctx);
 		title.setText("Title");
-		title.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.4f));
-		title.setTextSize(30);
+		title.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.6f));
+		title.setTextSize(16);
 		
-		TextView al = new TextView(ctx);
-		al.setText("Album");
-		al.setPadding(4, 0, 0, 0);
-		al.setTextSize(30);
-		al.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.3f));
 		
 		TextView ar = new TextView(ctx);
 		ar.setText("Artist");
 		ar.setPadding(4, 0, 0, 0);
-		ar.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.3f));
-		ar.setTextSize(30);
+		ar.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.4f));
+		ar.setTextSize(16);
 
 		layout.addView(title);
-		layout.addView(al);
 		layout.addView(ar);
 		layout.setId(R.id.list_header);
 		return layout;
