@@ -44,17 +44,23 @@ public class Album implements ListViewCreator{
 		for(ListViewCreator s : songs)
 			list.addView(s.createExpandableView(ctx));
 		
+		final ImageView img = new ImageView(ctx);
+		img.setImageResource(R.drawable.dropdown_default);
 		OnClickListener titleClick = new OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
-				if(list.getVisibility() == View.VISIBLE)
+				if(list.getVisibility() == View.VISIBLE){
 					list.setVisibility(View.GONE);
-				else
+					img.setImageResource(R.drawable.dropdown_default);
+				}else{
 					list.setVisibility(View.VISIBLE);
+					img.setImageResource(R.drawable.dropdown_expanded);
+				}
 			}
 			
 		};
+		img.setOnClickListener(titleClick);
 		
 		TextView title = new TextView(ctx);
 		title.setOnClickListener(titleClick);
@@ -72,6 +78,7 @@ public class Album implements ListViewCreator{
 		
 		inner.addView(title);
 		inner.addView(al);
+		inner.addView(img);
 		layout.addView(inner);
 		layout.addView(list);
 
@@ -107,7 +114,6 @@ public class Album implements ListViewCreator{
 			}
 			
 		};
-		
 		img.setOnClickListener(titleClick);
 		
 		TextView title = new TextView(ctx);
