@@ -9,7 +9,6 @@ public class ContactFragment extends android.support.v4.app.Fragment {
 	@Override
 	 public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	   Bundle savedInstanceState) {
-	  // TODO Auto-generated method stub
 	  View myFragmentView = inflater.inflate(R.layout.contact_fragment, container, false);
 	  
 	  return myFragmentView;

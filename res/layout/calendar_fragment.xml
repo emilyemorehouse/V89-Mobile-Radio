@@ -3,19 +3,175 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/calendarpanel"
     android:layout_width="fill_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#000000"
     android:orientation="vertical"
     android:padding="2dp" >
 
-    <ScrollView
-        android:id="@+id/calendar_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#000000"
-        android:text="@string/calendar_text"
-        android:textColor="#FFFFFF" >
-    </ScrollView>
-
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:id="@+id/calendartext0" 
+            android:text="Test"
+            android:gravity="left" />
+        <ImageView
+            android:src="@drawable/dropdown_default"
+            android:gravity="right"
+            android:id="@+id/calendarbutton0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/contentDesc"/>
+    </LinearLayout>
+    
+    <ListView
+        android:id="@+id/calendarlist0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+    
+    
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:id="@+id/calendartext1" />
+        <ImageView
+            android:src="@drawable/dropdown_default"
+            android:gravity="right"
+            android:id="@+id/calendarbutton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/contentDesc"/>
+    </LinearLayout>
+    <ListView
+        android:id="@+id/calendarlist1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+    
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:id="@+id/calendartext2" />
+        <ImageView
+            android:src="@drawable/dropdown_default"
+            android:gravity="right"
+            android:id="@+id/calendarbutton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/contentDesc"/>
+    </LinearLayout>
+    <ListView
+        android:id="@+id/calendarlist2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+    
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:id="@+id/calendartext3" />
+        <ImageView
+            android:src="@drawable/dropdown_default"
+            android:gravity="right"
+            android:id="@+id/calendarbutton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/contentDesc"/>
+    </LinearLayout>
+    <ListView
+        android:id="@+id/calendarlist3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+    
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:id="@+id/calendartext4" />
+        <ImageView
+            android:src="@drawable/dropdown_default"
+            android:gravity="right"
+            android:id="@+id/calendarbutton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/contentDesc"/>
+    </LinearLayout>
+    <ListView
+        android:id="@+id/calendarlist4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+    
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:id="@+id/calendartext5" />
+        <ImageView
+            android:src="@drawable/dropdown_default"
+            android:gravity="right"
+            android:id="@+id/calendarbutton5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/contentDesc"/>
+    </LinearLayout>
+    <ListView
+        android:id="@+id/calendarlist5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+    
+    
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:id="@+id/calendartext6" />
+        <ImageView
+            android:src="@drawable/dropdown_default"
+            android:gravity="right"
+            android:id="@+id/calendarbutton6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/contentDesc"/>
+    </LinearLayout>
+    <ListView
+        android:id="@+id/calendarlist6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
 
 </LinearLayout>

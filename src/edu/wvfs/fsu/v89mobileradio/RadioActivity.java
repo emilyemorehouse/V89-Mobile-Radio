@@ -50,7 +50,11 @@ public class RadioActivity extends FragmentActivity implements TaskInterface {
 		ft.replace(R.id.content_fragment, new RadioFragment());
 		myApp = (MobileRadioApplication)getApplication();
 		ft.commit();
-		
+		if(myApp.schedInit == false)
+		{
+			MobileRadioApplication.InitSchedule();
+			myApp.schedInit = true;
+		}
 		if(myApp.dbInit == false)
 		{
 			InitDatabase();
@@ -122,6 +126,7 @@ public class RadioActivity extends FragmentActivity implements TaskInterface {
 	
 	private void InitDatabase()
 	{
+		
     	// Path to the just created empty db
     	String outFileName = getFilesDir().getPath()+"/test.db";
 		File f = new File(outFileName);
