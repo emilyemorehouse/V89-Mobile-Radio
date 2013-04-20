@@ -3,9 +3,9 @@ package edu.wvfs.fsu.v89mobileradio;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -49,23 +49,37 @@ public class CustomAdapters {
 		
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			ScheduleItem item = items.get(position);
+			  ScheduleItem item = items.get(position);
 			  Context ctx = parent.getContext();
 			  LinearLayout view = new LinearLayout(ctx);
 			  view.setOrientation(LinearLayout.VERTICAL);
 
 			  TextView tv = new TextView(ctx);
 			  tv.setText(item.Title);
-			  tv.setTextSize(20);
+			  tv.setTextSize(18);
+			  if(item.IsPlaying())
+				  tv.setTextColor(Color.parseColor("#7dede9"));
 			  
+			  String hourDisplay;
+			  String amPm;
+			  if(item.Hour%12 == 0) hourDisplay = "12";
+			  else hourDisplay = String.valueOf(item.Hour%12);
+			  String minuteDisplay = String.valueOf(item.Minute);
+			  if(minuteDisplay.length() == 1)
+				  minuteDisplay = "0"+minuteDisplay;
+			  
+			  if(Math.floor(item.Hour/12) == 1) amPm = "pm";
+			  else amPm = "am";
+			  
+			  hourDisplay += ":" + minuteDisplay + amPm;
 			  
 			  TextView tv2 = new TextView(ctx);
-			  tv2.setText(String.valueOf(item.Day) + " " +String.valueOf(item.Hour) +":"+ String.valueOf(item.Minute));
-			  tv2.setTextSize(10);
+			  tv2.setText(hourDisplay);
+			  tv2.setTextSize(16);
 			  
 			  TextView tv3 = new TextView(ctx);
 			  tv3.setText(item.Description);
-			  tv3.setTextSize(10);
+			  tv3.setTextSize(14);
 			  
 			  view.addView(tv);
 			  view.addView(tv2);

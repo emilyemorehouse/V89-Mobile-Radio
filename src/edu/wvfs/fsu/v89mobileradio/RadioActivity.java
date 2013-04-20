@@ -108,6 +108,9 @@ public class RadioActivity extends FragmentActivity implements TaskInterface {
 		myApp.status = ConnectStatus.Connected;
 		myApp.disconContent.setVisibility(View.GONE);
 		myApp.conContent.setVisibility(View.VISIBLE);
+		ScheduleItem np = MobileRadioApplication.getNowPlaying();
+		MobileRadioApplication.nowPlayingDesc.setText(np.Description);
+		MobileRadioApplication.nowPlayingTitle.setText(np.Title);
 	}
 	@Override
 	public void onTaskError(final ErrorType type) {

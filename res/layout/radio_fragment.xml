@@ -27,7 +27,23 @@
 	   	    android:textAppearance="?android:attr/textAppearanceLarge"
 	   	    android:textColor="#ffffff"
 	   	    android:textSize="30sp" />
-
+	   	
+	   	<TextView
+ 			android:id="@+id/nowPlayingTitle"
+	   	    android:layout_width="wrap_content"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_gravity="center"
+	   	    android:layout_marginBottom="6dp"
+	   	    android:textSize="18sp"
+	   	    android:textColor="#7dede9" />
+	   	<TextView
+ 			android:id="@+id/nowPlayingDesc"
+	   	    android:layout_width="wrap_content"
+	   	    android:layout_height="wrap_content"
+	   	    android:layout_gravity="center"
+	   	    android:layout_marginBottom="17dp"
+	   	    android:textSize="16sp"
+	   	    android:textColor="#ffffff" />
 	   	<CheckBox
 	   	    android:id="@+id/playPause"
 	   	    style="@style/PlayButton"

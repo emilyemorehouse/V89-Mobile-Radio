@@ -2,6 +2,9 @@ package edu.wvfs.fsu.v89mobileradio;
 
 
 
+import java.util.Calendar;
+import java.util.TimeZone;
+
 import android.text.format.Time;
 
 public class ScheduleItem implements Comparable<ScheduleItem>{
@@ -37,30 +40,37 @@ public class ScheduleItem implements Comparable<ScheduleItem>{
 		Flag = flag;
 	}
 	
-	public boolean IsPlaying(Time t)
+	public boolean IsPlaying()
 	{
-		boolean rightDay = Day <= t.weekDay && DayEnd >= t.weekDay;
-		boolean rightHour = Hour <= t.hour && HourEnd >= t.hour;
-		boolean rightMinute = Minute <= t.minute && MinuteEnd >= t.minute;
+	  TimeZone tz = TimeZone.getTimeZone("America/New_York");
+	  Calendar t = Calendar.getInstance(tz);
+	  int CurrDay = t.get(Calendar.DAY_OF_WEEK)-1;
+	  int CurrMonthDay = t.get(Calendar.DAY_OF_MONTH)-1;
+	  int CurrHour = t.get(Calendar.HOUR_OF_DAY);
+	  int CurrMinute = t.get(Calendar.MINUTE);
+	  
+		boolean rightDay = Day <= CurrDay && DayEnd >= CurrDay;
+		boolean rightHour = Hour <= CurrHour && HourEnd >= CurrHour;
+		boolean rightMinute = Minute <= CurrMinute && MinuteEnd >= CurrMinute;
 		boolean flag = true;
 		if(Flag != FlagType.None)
 			switch(Flag)
 			{
 			case FirstWednesday:
-				flag = t.weekDay == Time.WEDNESDAY && Math.ceil(t.monthDay/7) == 1;
-				break;
-			case ThirdWednesday:
-				flag = t.weekDay == Time.WEDNESDAY && Math.ceil(t.monthDay/7) == 3;
-				break;
-			case FourthWednesday:
-				flag = t.weekDay == Time.WEDNESDAY && Math.ceil(t.monthDay/7) == 4;
-				break;
-			case FifthWednesday:
-				flag = t.weekDay == Time.WEDNESDAY && Math.ceil(t.monthDay/7) == 5;
-				break;
-			default:
-				break;
-			}
+                flag = CurrDay == Time.WEDNESDAY && Math.ceil(CurrMonthDay/7) == 1;
+                break;
+            case ThirdWednesday:
+                flag = CurrDay == Time.WEDNESDAY && Math.ceil(CurrMonthDay/7) == 3;
+                break;
+            case FourthWednesday:
+                flag = CurrDay == Time.WEDNESDAY && Math.ceil(CurrMonthDay/7) == 4;
+                break;
+            case FifthWednesday:
+                flag = CurrDay == Time.WEDNESDAY && Math.ceil(CurrMonthDay/7) == 5;
+                break;
+            default:
+                break;
+            }
 		return rightDay && rightHour && rightMinute && flag;
 			
 	}

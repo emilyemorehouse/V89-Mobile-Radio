@@ -1,7 +1,10 @@
 package edu.wvfs.fsu.v89mobileradio;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.TimeZone;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,13 +14,17 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 public class CalendarFragment extends android.support.v4.app.Fragment {
-	public String[] weekDays = {
+	public static String[] weekDays = {
 			"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"
 	};
 	
 	@Override
 	 public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	   Bundle savedInstanceState) {
+		  TimeZone tz = TimeZone.getTimeZone("America/New_York");
+		  Calendar t = Calendar.getInstance(tz);
+		  int CurrDay = t.get(Calendar.DAY_OF_WEEK)-1;
+		  
 		  final View myFragmentView = inflater.inflate(R.layout.calendar_fragment, container, false);
 		  final ArrayList<ListView> lvlist = new ArrayList<ListView>();
 		  lvlist.add((ListView)myFragmentView.findViewById(R.id.calendarlist0));
@@ -50,8 +57,7 @@ public class CalendarFragment extends android.support.v4.app.Fragment {
 	
 	  			@Override
 	  			public void onClick(View v) {
-	  				TextView tv = (TextView)v;
-	  				int id = Integer.parseInt(tv.getTag().toString());
+	  				int id = Integer.parseInt(v.getTag().toString());
 	  				ListView tag = lvlist.get(id);
 	  				ImageView button = ivlist.get(id);
 	  				if(tag.getVisibility() == View.VISIBLE){
@@ -77,10 +83,17 @@ public class CalendarFragment extends android.support.v4.app.Fragment {
 			  lv.setVisibility(View.GONE);
 			  
 			  TextView tv = tvlist.get(i);
+			  if(CurrDay == i)
+				  tv.setTextColor(Color.parseColor("#7dede9"));
 			  tv.setTag(i);
 			  tv.setTextSize(20);
 			  tv.setOnClickListener(titleClick);
+			  
 			  tv.setText(weekDays[i]);
+			  
+			  ImageView iv = ivlist.get(i);
+			  iv.setTag(i);
+			  iv.setOnClickListener(titleClick);
 		  }
 		  return myFragmentView;
 	 }
